@@ -1,0 +1,38 @@
+# 📋 Lead Form Automation using n8n
+
+## 📌 Overview
+This workflow helps collect & organize new project leads for an **automation agency**.  
+It automatically sends an email with lead details and categorizes them based on project budget, making the process faster and more organized.
+
+---
+
+## ⚙️ How it works – step by step
+1. **Form Trigger**  
+   - User submits a form with fields: Full Name, Email, Project description, Time frame, and Budget.
+2. **Switch Node**  
+   - Checks the selected project budget (e.g., $1000–$2000, $2000–$3000, $3000–$10,000).
+3. **Gmail Nodes**  
+   - Sends an email notification to the agency owner with all lead details (project, budget, time frame).
+4. **Add Labels**  
+   - Based on the budget, automatically labels the email in Gmail (Low, Medium, or High budget) for better filtering and follow-up.
+
+---
+
+## 🛠 Technologies & APIs used
+- **n8n:** Low-code workflow automation tool.
+- **Gmail API:** To send emails and apply labels.
+- **Form Trigger:** For capturing new lead submissions.
+
+## 🎯 Why this is useful
+- Automates the first step of client onboarding.
+- Helps organize leads by budget, making prioritization easier.
+- Reduces manual data entry and speeds up follow-up.
+
+## 📍 Author
+Built by [Mehran Mehdi](https://www.linkedin.com/in/mehran-mehdi)
+
+⭐NOTE:- Part of my personal workflow automation projects to learn real-world lead management.
+
+## 📂 Files
+- [Download n8n workflow JSON]()
+
