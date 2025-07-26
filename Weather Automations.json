@@ -1,0 +1,533 @@
+{
+  "name": "Weather Automations",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Location ",
+        "formDescription": "Select the unique location from the list ",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Select your location ",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Roorkee"
+                  },
+                  {
+                    "option": "Dehradun"
+                  },
+                  {
+                    "option": "New Delhi"
+                  },
+                  {
+                    "option": "Mumbai"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -992,
+        16
+      ],
+      "id": "61b24677-7d71-411d-8e34-62ef6fe528b8",
+      "name": "On form submission",
+      "webhookId": "f743de99-8943-45bb-a611-c3f8b447ebf6"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['Select your location '] }}",
+                    "rightValue": "Roorkee",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cf0ec1f9-bf69-44e5-9fef-0277ef8402b3"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Roorkee"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8fb26d21-8393-4f74-a571-9d5c3a116624",
+                    "leftValue": "={{ $json['Select your location '] }}",
+                    "rightValue": "Dehradun",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Dehradun"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "18300f71-3f65-4b09-a949-f6b41cd385da",
+                    "leftValue": "={{ $json['Select your location '] }}",
+                    "rightValue": "New Delhi",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "New Delhi"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6926aba4-8ec5-41df-9238-d670807b7ea1",
+                    "leftValue": "={{ $json['Select your location '] }}",
+                    "rightValue": "Mumbai",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Mumbai"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -672,
+        -16
+      ],
+      "id": "5ce1a375-9638-4a4d-a788-8e456442eb03",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.open-meteo.com/v1/forecast?latitude={{ $json.Lattitude }}&longitude={{ $json.Longitude }}&hourly=temperature_2m&timezone=auto",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        304,
+        16
+      ],
+      "id": "6bca3831-0c52-4175-a998-db039cd636e5",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "defa5095-a5d9-4366-beea-04438c7feaa8",
+              "name": "Lattitude",
+              "value": "29.85",
+              "type": "string"
+            },
+            {
+              "id": "319581e8-caa2-4ceb-ac5f-a6d1f964e95f",
+              "name": "Longitude",
+              "value": "77.88",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        -288
+      ],
+      "id": "e26f82fe-da27-4027-a0f2-73d904b94f01",
+      "name": "Roorkee coordinates "
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "defa5095-a5d9-4366-beea-04438c7feaa8",
+              "name": "Lattitude",
+              "value": "30.31",
+              "type": "string"
+            },
+            {
+              "id": "319581e8-caa2-4ceb-ac5f-a6d1f964e95f",
+              "name": "Longitude",
+              "value": "78.03",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        -96
+      ],
+      "id": "fd70d543-8af1-45c6-8670-8097d5631b35",
+      "name": "Dehradun coordinates"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "defa5095-a5d9-4366-beea-04438c7feaa8",
+              "name": "Lattitude",
+              "value": "28.61",
+              "type": "string"
+            },
+            {
+              "id": "319581e8-caa2-4ceb-ac5f-a6d1f964e95f",
+              "name": "Longitude",
+              "value": "77.20",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        112
+      ],
+      "id": "d3e3b51c-cb8e-4ffb-bd5a-7e77b735ed97",
+      "name": "New Delhi  coordinates"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "defa5095-a5d9-4366-beea-04438c7feaa8",
+              "name": "Lattitude",
+              "value": "18.95",
+              "type": "string"
+            },
+            {
+              "id": "319581e8-caa2-4ceb-ac5f-a6d1f964e95f",
+              "name": "Longitude",
+              "value": "72.83",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        320
+      ],
+      "id": "bd88fca2-be33-425e-82e2-b18a58fa1ae6",
+      "name": "Mumbai coordinates"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Assume your weather data is in the first item of the array\nconst data = items[0].json;\n\n// Get today's date in YYYY-MM-DD format\nconst now = new Date();\nconst year = now.getFullYear();\nconst month = (now.getMonth() + 1).toString().padStart(2, '0'); \nconst day = now.getDate().toString().padStart(2, '0');\nconst today = year + '-' + month + '-' + day;\n\n// Initialize min and max with null\nlet minTemp = null;\nlet maxTemp = null;\n\n// Loop over the hourly times\nfor (let i = 0; i < data.hourly.time.length; i++) {\n  const time = data.hourly.time[i];\n  const temp = data.hourly.temperature_2m[i];\n\n  // Check if this hour is from today\n  if (time.startsWith(today)) {\n    if (minTemp === null || temp < minTemp) {\n      minTemp = temp;\n    }\n    if (maxTemp === null || temp > maxTemp) {\n      maxTemp = temp;\n    }\n  }\n}\n\n// Return the result as JSON\nreturn [\n  {\n    json: {\n      date: today,\n      highTemperature: maxTemp,\n      lowTemperature: minTemp\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        16
+      ],
+      "id": "ef272185-9a62-4907-9f8e-7205a5140724",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appotX5hY9QqebU1t",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/appotX5hY9QqebU1t"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblE7q0qfhIcxDWTu",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appotX5hY9QqebU1t/tblE7q0qfhIcxDWTu"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Location": "={{ $('On form submission').item.json['Select your location '] }}",
+            "High (C)": "={{ $json.highTemperature }}",
+            "Low (C)": "={{ $json.lowTemperature }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "High (C)",
+              "displayName": "High (C)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Low (C)",
+              "displayName": "Low (C)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "created time ",
+              "displayName": "created time ",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        944,
+        16
+      ],
+      "id": "f632870b-05d4-44ab-b125-4e48ecd71b01",
+      "name": "Airtable ",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "Fp8CcMUmEhyvNT2s",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Roorkee coordinates ",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dehradun coordinates",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "New Delhi  coordinates",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mumbai coordinates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Roorkee coordinates ": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dehradun coordinates": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New Delhi  coordinates": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mumbai coordinates": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Airtable ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f39ddf6d-c03d-4a32-8e4b-fd4093c0dee0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a6cb5117eec7fcfa80b250d03d31d45a8cc462319873f41b1f12364fcdfc668a"
+  },
+  "id": "Pyu41QFPNlnCX3Da",
+  "tags": []
+}
